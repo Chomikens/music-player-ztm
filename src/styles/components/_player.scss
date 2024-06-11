@@ -1,0 +1,28 @@
+.player-container {
+ height: 600px;
+  max-width: 400px;
+  margin-inline: auto;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  > * + * {
+    margin-top: 1rem;
+  }
+
+  &__header {
+    position: relative;
+    }
+    img {
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+      box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+
+    }
+  }
+ 
+ 
+

@@ -1,0 +1,41 @@
+@use "../abstracts/" as *;
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: clrMap(background-clr);
+  color: clrMap(on-background);
+
+ 
+  &::after {
+    content: "";
+    position: absolute;
+    inset:0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#03DAC6, #e91e63 );
+    clip-path: circle(10% at 0% 0%);
+    transition: clip-path 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+    
+    }
+      &:hover:after{
+        clip-path: circle(150% at 0% 0%);
+      }
+
+}
+
+
+.container {
+  position: relative;
+  width: min(100% - 2rem, 60rem);
+  margin-inline: auto;
+  z-index: 1;
+}
+
