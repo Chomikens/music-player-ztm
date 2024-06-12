@@ -7,8 +7,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   min-height: 100svh;
-  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background-color: clrMap(background-clr);
   color: clrMap(on-background);
 
@@ -23,8 +22,16 @@ body {
     transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 
-  &:hover:after {
-    clip-path: circle(150% at 0% 0%);
+  @media (hover: hover) {
+    &:hover::after {
+      clip-path: circle(150% at 0% 0%);
+    }
+  }
+
+  @media (hover: none) {
+    &::after {
+      clip-path: circle(150% at 0% 0%);
+    }
   }
 }
 

@@ -7,6 +7,7 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   overflow: hidden;
+
   > * + * {
     margin-top: 1rem;
   }
@@ -17,13 +18,19 @@
     transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
-    &:hover {
-      .player-container__header-image {
-        grid-template-rows: 300px;
-      }
-   
+  @media (hover: hover) {
+    &:hover .player-container__header-image {
+      grid-template-rows: 300px;
+    }
+  }
+
+  @media (hover: none) {
+    .player-container__header-image {
+      grid-template-rows: 300px;
+    }
   }
 }
+
 img {
   object-fit: cover;
   object-position: center;

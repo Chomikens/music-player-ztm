@@ -83,12 +83,17 @@ body::after {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#03DAC6, #e91e63);
+  background: linear-gradient(#03dac6, #e91e63);
   clip-path: circle(10% at 0% 0%);
   transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-@media (hover) {
-  body:hover:after {
+@media (hover: hover) {
+  body:hover::after {
+    clip-path: circle(150% at 0% 0%);
+  }
+}
+@media (hover: none) {
+  body::after {
     clip-path: circle(150% at 0% 0%);
   }
 }
@@ -123,6 +128,11 @@ body::after {
     grid-template-rows: 300px;
   }
 }
+@media (hover: none) {
+  .player-container .player-container__header-image {
+    grid-template-rows: 300px;
+  }
+}
 
 img {
   object-fit: cover;
@@ -131,5 +141,3 @@ img {
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 }
-
-/*# sourceMappingURL=style.css.map */
