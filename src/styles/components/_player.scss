@@ -1,6 +1,10 @@
+@use "../abstracts/" as *;
+
 .player-container {
-  height: 600px;
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+  max-width: 500px;
   margin-inline: auto;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   border-radius: 15px;
@@ -8,13 +12,13 @@
   backdrop-filter: blur(20px);
   overflow: hidden;
 
-  > * + * {
-    margin-top: 1rem;
+  > * {
+    flex-grow: 1;
   }
 
   &__header-image {
     display: grid;
-    grid-template-rows: 600px;
+    grid-template-rows: 650px;
     transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
@@ -29,12 +33,27 @@
       grid-template-rows: 300px;
     }
   }
-}
+  img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
 
-img {
-  object-fit: cover;
-  object-position: center;
-  width: 100%;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 1rem;
+    text-align: center;
+    > * + * {
+      margin-top: 1rem;
+    }
+    h2,
+    h3 {
+      color: #242323;
+    }
+  }
 }

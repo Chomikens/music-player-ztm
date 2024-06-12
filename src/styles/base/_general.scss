@@ -41,3 +41,12 @@ body {
   margin-inline: auto;
   z-index: 1;
 }
+
+
+h2 {
+  font-size: clamp(1.5rem, 2vw + 1.5rem, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem);
+}
