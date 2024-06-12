@@ -16,12 +16,12 @@
     grid-template-rows: 600px;
     transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   }
-  @media (hover: hover) {
+
     &:hover {
       .player-container__header-image {
         grid-template-rows: 300px;
       }
-    }
+   
   }
 }
 img {

@@ -12,28 +12,21 @@ body {
   background-color: clrMap(background-clr);
   color: clrMap(on-background);
 
- 
   &::after {
     content: "";
     position: absolute;
-    inset:0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(#03DAC6, #e91e63 );
+    background: linear-gradient(#03dac6, #e91e63);
     clip-path: circle(10% at 0% 0%);
-    transition: clip-path 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+    transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 
-    
-    }
-    @media(hover) {
-
-      &:hover:after{
-        clip-path: circle(150% at 0% 0%);
-      }
-    }
-
+  &:hover:after {
+    clip-path: circle(150% at 0% 0%);
+  }
 }
-
 
 .container {
   position: relative;
@@ -41,4 +34,3 @@ body {
   margin-inline: auto;
   z-index: 1;
 }
-
