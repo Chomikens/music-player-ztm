@@ -87,8 +87,10 @@ body::after {
   clip-path: circle(10% at 0% 0%);
   transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-body:hover:after {
-  clip-path: circle(150% at 0% 0%);
+@media (hover) {
+  body:hover:after {
+    clip-path: circle(150% at 0% 0%);
+  }
 }
 
 .container {
@@ -111,10 +113,18 @@ body:hover:after {
 .player-container > * + * {
   margin-top: 1rem;
 }
-.player-container__header {
-  position: relative;
+.player-container__header-image {
+  display: grid;
+  grid-template-rows: 600px;
+  transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.player-container img {
+@media (hover: hover) {
+  .player-container:hover .player-container__header-image {
+    grid-template-rows: 300px;
+  }
+}
+
+img {
   object-fit: cover;
   object-position: center;
   width: 100%;

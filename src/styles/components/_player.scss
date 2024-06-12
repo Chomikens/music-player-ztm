@@ -1,5 +1,5 @@
 .player-container {
- height: 600px;
+  height: 600px;
   max-width: 400px;
   margin-inline: auto;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
@@ -11,18 +11,23 @@
     margin-top: 1rem;
   }
 
-  &__header {
-    position: relative;
-    }
-    img {
-      object-fit: cover;
-      object-position: center;
-      width: 100%;
-      box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-
+  &__header-image {
+    display: grid;
+    grid-template-rows: 600px;
+    transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  @media (hover: hover) {
+    &:hover {
+      .player-container__header-image {
+        grid-template-rows: 300px;
+      }
     }
   }
- 
- 
-
+}
+img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}

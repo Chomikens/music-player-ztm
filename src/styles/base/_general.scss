@@ -25,9 +25,12 @@ body {
 
     
     }
+    @media(hover) {
+
       &:hover:after{
         clip-path: circle(150% at 0% 0%);
       }
+    }
 
 }
 
