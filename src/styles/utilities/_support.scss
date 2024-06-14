@@ -1,12 +1,12 @@
+.shown {
+    display: block;
+    animation: shown 1s;
+}
 .hidden {
     display: none; 
    animation: vanish 1s;
 }
 
-.shown {
-    display: block;
-    animation: shown 1s;
-}
 
 @keyframes vanish {
     from {

@@ -226,16 +226,17 @@ h3 {
 }
 .player-controls button:active svg, .player-controls button:focus-within svg {
   fill: #fff;
-}
-
-.hidden {
-  display: none;
-  animation: vanish 1s;
+  box-shadow: inset 20px 20px 60px #070707, inset -20px -20px 60px #1d1d1d;
 }
 
 .shown {
   display: block;
   animation: shown 1s;
+}
+
+.hidden {
+  display: none;
+  animation: vanish 1s;
 }
 
 @keyframes vanish {
