@@ -26,31 +26,31 @@
   align-items: center;
   padding-block: 0.5em;
   gap: 2rem;
-  width:100%;
+  width: 100%;
   button {
     position: relative;
     width: 30px;
     height: 30px;
-    padding:20px;
+    padding: 20px;
     background-color: #fff;
     border-radius: 50%;
     svg {
-        position: absolute;
-  left: 50%;
-  top: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
       max-width: 20px;
       transform: translate(-50%, -50%);
-      transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    
+      transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 10s cubic-bezier(0.755, 0.05, 0.855, 0.06);
     }
 
     &:active,
-    &:focus-within{
-        background-color: #242323;
-        border: 1px solid #242323;;
-        svg {
-            fill: #fff;
-        }
+    &:focus-within {
+      background-color: #242323;
+      border: 1px solid #242323;
+      svg {
+        fill: #fff;
+      }
     }
   }
 }
