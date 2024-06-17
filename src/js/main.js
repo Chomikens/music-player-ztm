@@ -1,117 +1,133 @@
 import songs from "./song.js";
 
 const buttonContainer = document.querySelector(".player-controls");
-const audio = document.querySelector("audio"); 
+const audioElement = document.querySelector("audio");
 
-function handleSong(song) {
-const playButton = document.querySelector("button#play")
+function createMusicPlayer(songList) {
+  const playButton = document.querySelector("button#play");
   const playIcon = document.getElementById("playIcon");
-  const stopIcon = document.getElementById("stopIcon");
+  const pauseIcon = document.getElementById("pauseIcon");
 
-  const nextButton = document.querySelector("button#next")
-  const prevtButton = document.querySelector("button#prev")
+  const nextButton = document.querySelector("button#next");
+  const prevButton = document.querySelector("button#prev");
 
-  let currentIndex = 0; 
-  
-  const title = document.querySelector("#music-title");
-  const artist = document.querySelector("#music-author");
-  const img = document.querySelector("#cover-img");
+  let currentSongIndex = 0;
+
+  const titleElement = document.querySelector("#music-title");
+  const artistElement = document.querySelector("#music-author");
+  const coverImage = document.querySelector("#cover-img");
+
+  const durationElement = document.querySelector("#duration");
 
   function renderSong() {
-    img.src = `src/img/${song[currentIndex].name}.jpg`;
-    title.textContent = song[currentIndex].displayName;
-    artist.textContent = song[currentIndex].artist;
-    audio.src = `src/mp3/${song[currentIndex].name}.mp3`;
-    img.onload = function() {
-      img.setAttribute("height", img.naturalHeight);
-      img.setAttribute("width", img.naturalWidth);
+    const currentSong = songList[currentSongIndex];
+    coverImage.src = `src/img/${currentSong.name}.jpg`;
+    titleElement.textContent = currentSong.displayName;
+    artistElement.textContent = currentSong.artist;
+    audioElement.src = `src/mp3/${currentSong.name}.mp3`;
+
+    coverImage.onload = function () {
+      coverImage.setAttribute("height", coverImage.naturalHeight);
+      coverImage.setAttribute("width", coverImage.naturalWidth);
     };
-    
+
+    audioElement.onloadedmetadata = function () {
+      durationElement.textContent = formatTime(audioElement.duration);
+    };
   }
 
-  function stopMusicButton() {
-
+  function showPlayButton() {
     playIcon.classList.replace("hidden", "shown");
-    stopIcon.classList.replace("shown", "hidden");
-  
+    pauseIcon.classList.replace("shown", "hidden");
+
     playButton.dataset.musicState = "play";
     playButton.setAttribute("title", "Play song");
-  
   }
 
-  function playMusicButton()  {
+  function showPauseButton() {
     playIcon.classList.replace("shown", "hidden");
-    stopIcon.classList.replace("hidden", "shown");
-  
-    playButton.dataset.musicState = "stop";
-    playButton.setAttribute("title", "Pause");
+    pauseIcon.classList.replace("hidden", "shown");
+
+    playButton.dataset.musicState = "pause";
+    playButton.setAttribute("title", "Pause song");
   }
-  
+
+  function updateProgressBar(e) {
+    const { duration, currentTime } = e.srcElement;
+    console.log(duration, currentTime);
+  }
+
   function playAudio() {
-    audio.play()
+    audioElement.play();
+    audioElement.addEventListener("timeupdate", updateProgressBar);
   }
 
-  function stopAudio() {
-    audio.pause()
+  function pauseAudio() {
+    audioElement.pause();
+    audioElement.removeEventListener("timeupdate", updateProgressBar);
   }
 
-  function nextSong() {
-    currentIndex = (currentIndex + 1) % song.length;
-    renderSong()
+  function playNextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songList.length;
+    renderSong();
   }
 
-  
-  function prevSong() {
-    currentIndex = (currentIndex - 1 + song.length) % song.length;
-    renderSong()
+  function playPreviousSong() {
+    currentSongIndex = (currentSongIndex - 1 + songList.length) % songList.length;
+    renderSong();
+  }
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
   return {
     renderSong,
-    nextSong,
-    prevSong,
-    playMusicButton,
-    stopMusicButton,
+    playNextSong,
+    playPreviousSong,
+    showPlayButton,
+    showPauseButton,
     playAudio,
-    stopAudio,
+    pauseAudio,
   };
 }
 
-const player = handleSong(songs);
-player.renderSong();
+const musicPlayer = createMusicPlayer(songs);
+musicPlayer.renderSong();
 
+function handleControlButtons(e) {
+  const clickedButton = e.target.closest("button");
 
-function controlsMusic(e) {
-  const playButton = e.target.closest("button");
+  if (!clickedButton) return;
 
-  if (!playButton) return;
-
-  switch (playButton.dataset.musicState) {
+  switch (clickedButton.dataset.musicState) {
     case "play":
-      player.playMusicButton();
-      player.playAudio();
+      musicPlayer.showPauseButton();
+      musicPlayer.playAudio();
       break;
 
-    case "stop":
-      player.stopMusicButton();
-      player.stopAudio();
+    case "pause":
+      musicPlayer.showPlayButton();
+      musicPlayer.pauseAudio();
       break;
 
     case "next":
-      player.stopMusicButton()
-      player.nextSong()
+      musicPlayer.showPlayButton();
+      musicPlayer.playNextSong();
       break;
 
     case "prev":
-      player.stopMusicButton()
-      player.prevSong()
+      musicPlayer.showPlayButton();
+      musicPlayer.playPreviousSong();
       break;
 
     default:
-      console.error("Something goes wrong")
+      console.error("Unknown action");
   }
 }
 
 buttonContainer.addEventListener("click", (e) => {
-  controlsMusic(e);
+  handleControlButtons(e);
 });
