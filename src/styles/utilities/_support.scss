@@ -1,10 +1,10 @@
 .shown {
     display: block;
-    animation: shown 1s;
+    animation: shown 0.5s cubic-bezier(0.075, 0.82, 0.165, 1)
 }
 .hidden {
     display: none; 
-   animation: vanish 1s;
+    animation: shown 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 
 }
 
 

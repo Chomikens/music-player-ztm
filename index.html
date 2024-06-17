@@ -9,7 +9,7 @@
       defer
       crossorigin="anonymous"
     ></script>
-    <script  defer src="src/js/main.js"></script>
+    <script type="module" defer src="src/js/main.js"></script>
     <title>Music player | Kotorozec</title>
   </head>
   <body>
@@ -20,19 +20,20 @@
             <header class="player-container__header">
               <div class="player-container__header-image">
                 <img
-                  src="./src/img/jacinto-1.jpg"
+                  src=""
                   alt="Album art cover image"
-                  height="951"
-                  width="34"
+                  height=""
+                  width=""
+                  id="cover-img"
                 />
               </div>
             </header>
             <div class="player-container__content">
-              <h2 id="music-title">Electric Chill Machine</h2>
-              <h3 id="music-author">Jacitno</h3>
+              <h2 id="music-title"></h2>
+              <h3 id="music-author"></h3>
             </div>
             <footer class="player-container__controls">
-              <audio src="./src/mp3/jacinto-1.mp3"></audio>
+              <audio src=""></audio>
 
               <div class="progress-container" id="progress-container">
                 <div class="progress" id="progress"></div>
@@ -43,7 +44,7 @@
               </div>
 
               <div class="player-controls">
-                <button id="prev" title="Previous song">
+                <button id="prev" title="Previous song" data-music-state="prev">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
                       d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"
@@ -63,7 +64,7 @@
                   </svg>
                 </button>
          
-                <button id="next" title="Next song">
+                <button id="next" title="Next song" data-music-state="next">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -30 550 512">
                     <path
                       d="M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4L224 214.3V256v41.7L52.5 440.6zM256 352V256 128 96c0-12.4 7.2-23.7 18.4-29s24.5-3.6 34.1 4.4l192 160c7.3 6.1 11.5 15.1 11.5 24.6s-4.2 18.5-11.5 24.6l-192 160c-9.5 7.9-22.8 9.7-34.1 4.4s-18.4-16.6-18.4-29V352z"
