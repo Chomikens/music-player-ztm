@@ -71,6 +71,10 @@ function createMusicPlayer(songList) {
     const progressPercent = Math.floor((currentTime / duration) * 100);
     progressBar.style.width = `${progressPercent}%`;
     progressBar.setAttribute("aria-valuenow", `${progressPercent}%`);
+
+    if(progressPercent === 100) {
+      playNextSong()
+    }
   }
 
   // Function to play audio
@@ -89,12 +93,14 @@ function createMusicPlayer(songList) {
   function playNextSong() {
     currentSongIndex = (currentSongIndex + 1) % songList.length;
     renderSong();
+    audioElement.play();
   }
 
   // Function to play the previous song
   function playPreviousSong() {
     currentSongIndex = (currentSongIndex - 1 + songList.length) % songList.length;
     renderSong();
+    audioElement.play();
   }
 
   // Function to format time in minutes and seconds

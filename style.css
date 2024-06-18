@@ -1,0 +1,270 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  hanging-punctuation: first last;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+  line-height: 1;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+}
+
+button {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :has(:target) {
+    scroll-behavior: smooth;
+  }
+}
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: #121212;
+  color: #ffffff;
+}
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#03dac6, #e91e63);
+  clip-path: circle(10% at 0% 0%);
+  transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@media (hover: hover) {
+  body:hover::after {
+    clip-path: circle(150% at 0% 0%);
+  }
+}
+@media (hover: none) {
+  body::after {
+    clip-path: circle(150% at 0% 0%);
+  }
+}
+
+.container {
+  position: relative;
+  width: min(100% - 2rem, 60rem);
+  margin-inline: auto;
+  z-index: 1;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2vw + 1.5rem, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1.5vw + 1rem, 2rem);
+}
+
+.player-container {
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+  max-width: 500px;
+  margin-inline: auto;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+.player-container > * {
+  flex-grow: 1;
+}
+.player-container__header-image {
+  display: grid;
+  grid-template-rows: 650px;
+  transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+@media (hover: hover) {
+  .player-container:hover .player-container__header-image {
+    grid-template-rows: 300px;
+  }
+}
+@media (hover: none) {
+  .player-container .player-container__header-image {
+    grid-template-rows: 300px;
+  }
+}
+.player-container img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+.player-container__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1rem;
+  text-align: center;
+}
+.player-container__content > * + * {
+  margin-top: 1rem;
+}
+.player-container__content h2,
+.player-container__content h3 {
+  color: #242323;
+}
+
+.progress {
+  background: #242323;
+  border-radius: 10px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.progress-container {
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px auto 40px;
+  height: 9px;
+  width: 90%;
+}
+
+.duration-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0.5rem 1.5rem;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 0.5em;
+  gap: 2rem;
+  width: 100%;
+}
+.player-controls button {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.player-controls button svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  max-width: 20px;
+  transform: translate(-50%, -50%);
+  transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 10s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+}
+.player-controls button:active, .player-controls button:focus-within {
+  background-color: #242323;
+  border: 1px solid #242323;
+}
+.player-controls button:active svg, .player-controls button:focus-within svg {
+  fill: #fff;
+}
+
+.shown {
+  display: block;
+  animation: shown 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.hidden {
+  display: none;
+  animation: shown 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.transformY {
+  transform: translateY(-100%);
+}
+
+.transformYBack {
+  transform: translateY(0);
+}
+
+@keyframes vanish {
+  from {
+    display: block;
+    opacity: 1;
+  }
+  to {
+    display: none;
+    opacity: 0;
+  }
+}
+@keyframes shown {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: block;
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
