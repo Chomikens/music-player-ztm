@@ -9,6 +9,8 @@ import {
   getArtistElement,
   getCoverImage,
   getDurationElement,
+  getCurrentTimeElement,
+  getProgressBar,
 } from "./domElements.js";
 
 function createMusicPlayer(songList) {
@@ -23,6 +25,8 @@ function createMusicPlayer(songList) {
   const artistElement = getArtistElement();
   const coverImage = getCoverImage();
   const durationElement = getDurationElement();
+  const currentTimePlayer = getCurrentTimeElement();
+  const progressBar = getProgressBar();
 
   function renderSong() {
     const currentSong = songList[currentSongIndex];
@@ -58,8 +62,11 @@ function createMusicPlayer(songList) {
   }
 
   function updateProgressBar(e) {
-    const { duration, currentTime } = e.srcElement;
-    console.log(duration, currentTime);
+    const { currentTime, duration } = e.srcElement;
+    currentTimePlayer.textContent = formatTime(currentTime);
+    const progressPercent = Math.floor((currentTime / duration) * 100);
+    progressBar.style.width = `${progressPercent}%`;
+    progressBar.setAttribute("aria-valuenow", `${progressPercent}%`)
   }
 
   function playAudio() {

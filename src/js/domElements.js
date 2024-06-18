@@ -9,12 +9,12 @@ let buttonContainer,
   playButton,
   playIcon,
   pauseIcon,
-  nextButton,
-  prevButton,
   titleElement,
   artistElement,
   coverImage,
-  durationElement;
+  durationElement,
+  currentTimePlayer,
+  progressBar;
 
 const getButtonContainer = () =>
   buttonContainer ||
@@ -35,6 +35,10 @@ const getCoverImage = () =>
   coverImage || (coverImage = document.querySelector("#cover-img"));
 const getDurationElement = () =>
   durationElement || (durationElement = document.querySelector("#duration"));
+const getCurrentTimeElement = () =>
+    currentTimePlayer || (currentTimePlayer = document.querySelector("#current-time"));
+const getProgressBar = () =>
+    progressBar || (progressBar = document.querySelector("#progress"));
 
 export {
   getButtonContainer,
@@ -46,4 +50,6 @@ export {
   getArtistElement,
   getCoverImage,
   getDurationElement,
+  getCurrentTimeElement,
+  getProgressBar,
 };

@@ -8,6 +8,14 @@
 }
 
 
+.transformY{
+    transform: translateY(-100%);
+}
+
+.transformYBack{
+    transform: translateY(0);
+}
+
 @keyframes vanish {
     from {
         display: block;
