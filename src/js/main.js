@@ -37,16 +37,17 @@ function createMusicPlayer(songList) {
   function renderSong() {
     const currentSong = songList[currentSongIndex];
 
+    // Check if the song is cached
     if (!songCache[currentSong.name]) {
       // Load and cache the song if not already cached
       const songUrl = `src/mp3/${currentSong.name}.mp3`;
       songCache[currentSong.name] = songUrl;
-      audioElement.src = songUrl;
-    } else {
-      // Use cached song URL
-      audioElement.src = songCache[currentSong.name];
     }
 
+    // Set the audio source
+    audioElement.src = songCache[currentSong.name];
+
+    // Update the UI elements
     coverImage.src = `src/img/${currentSong.name}.webp`;
     titleElement.textContent = currentSong.displayName;
     artistElement.textContent = currentSong.artist;
@@ -186,7 +187,6 @@ function handleControlButtons(e) {
 // Add event listener to the button container
 const buttonContainer = getButtonContainer();
 buttonContainer.addEventListener("click", handleControlButtons);
-
 
 // Add swipe detection to the player container
 const playerContainer = document.querySelector('.player-container'); // Adjust this selector to your actual container
