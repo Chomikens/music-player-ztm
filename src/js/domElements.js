@@ -14,7 +14,8 @@ let buttonContainer,
   coverImage,
   durationElement,
   currentTimePlayer,
-  progressBar;
+  progressBar,
+  progressContainer;
 
 const getButtonContainer = () =>
   buttonContainer ||
@@ -39,6 +40,8 @@ const getCurrentTimeElement = () =>
     currentTimePlayer || (currentTimePlayer = document.querySelector("#current-time"));
 const getProgressBar = () =>
     progressBar || (progressBar = document.querySelector("#progress"));
+const getProgressContainer = () =>
+    progressContainer || (progressContainer = document.querySelector("#progress-container"));
 
 export {
   getButtonContainer,
@@ -52,4 +55,5 @@ export {
   getDurationElement,
   getCurrentTimeElement,
   getProgressBar,
+  getProgressContainer,
 };

@@ -11,6 +11,7 @@ import {
   getDurationElement,
   getCurrentTimeElement,
   getProgressBar,
+  getProgressContainer,
 } from "./domElements.js";
 
 // Function to create a music player
@@ -26,7 +27,7 @@ function createMusicPlayer(songList) {
   const durationElement = getDurationElement();
   const currentTimePlayer = getCurrentTimeElement();
   const progressBar = getProgressBar();
-
+  const progressContainer = getProgressContainer();
   // Current song index
   let currentSongIndex = 0;
 
@@ -46,6 +47,7 @@ function createMusicPlayer(songList) {
     audioElement.onloadedmetadata = function () {
       durationElement.textContent = formatTime(audioElement.duration);
     };
+    progressContainer.addEventListener("click", updateDuration);
   }
 
   // Function to show the play button
@@ -80,14 +82,26 @@ function createMusicPlayer(songList) {
     }
   }
 
+
+  //  Manually update progressBar
+  function updateDuration(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const { duration } = audioElement;
+    audioElement.currentTime = (clickX / width) * duration
+    playAudio()
+  }
+
   // Function to play audio
   function playAudio() {
+    showPauseButton();
     audioElement.play();
     audioElement.addEventListener("timeupdate", updateProgressBar);
   }
 
   // Function to pause audio
   function pauseAudio() {
+    showPlayButton();
     audioElement.pause();
     audioElement.removeEventListener("timeupdate", updateProgressBar);
   }
@@ -119,8 +133,6 @@ function createMusicPlayer(songList) {
     renderSong,
     playNextSong,
     playPreviousSong,
-    showPlayButton,
-    showPauseButton,
     playAudio,
     pauseAudio,
   };
@@ -137,22 +149,19 @@ function handleControlButtons(e) {
 
   switch (clickedButton.dataset.musicState) {
     case "play":
-      musicPlayer.showPauseButton();
       musicPlayer.playAudio();
+
       break;
     case "pause":
-      musicPlayer.showPlayButton();
       musicPlayer.pauseAudio();
       break;
     case "next":
       musicPlayer.playNextSong();
       musicPlayer.playAudio();
-      musicPlayer.showPauseButton();
       break;
     case "prev":
       musicPlayer.playPreviousSong();
       musicPlayer.playAudio();
-      musicPlayer.showPauseButton();
       break;
     default:
       console.error("Unknown action");
