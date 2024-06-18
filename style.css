@@ -219,6 +219,7 @@ h3 {
   max-width: 20px;
   transform: translate(-50%, -50%);
   transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 10s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  pointer-events: none;
 }
 .player-controls button:active, .player-controls button:focus-within {
   background-color: #242323;
