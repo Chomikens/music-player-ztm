@@ -30,14 +30,26 @@ function createMusicPlayer(songList) {
   const progressContainer = getProgressContainer();
   // Current song index
   let currentSongIndex = 0;
+  // Cache for loaded songs
+  const songCache = {};
 
   // Function to render a song
   function renderSong() {
     const currentSong = songList[currentSongIndex];
+
+    if (!songCache[currentSong.name]) {
+      // Load and cache the song if not already cached
+      const songUrl = `src/mp3/${currentSong.name}.mp3`;
+      songCache[currentSong.name] = songUrl;
+      audioElement.src = songUrl;
+    } else {
+      // Use cached song URL
+      audioElement.src = songCache[currentSong.name];
+    }
+
     coverImage.src = `src/img/${currentSong.name}.webp`;
     titleElement.textContent = currentSong.displayName;
     artistElement.textContent = currentSong.artist;
-    audioElement.src = `src/mp3/${currentSong.name}.mp3`;
 
     coverImage.onload = function () {
       coverImage.setAttribute("height", coverImage.naturalHeight);
@@ -92,43 +104,39 @@ function createMusicPlayer(songList) {
     }
   }
 
-
-  //  Manually update progressBar
+  // Manually update progressBar
   function updateDuration(e) {
     const width = this.clientWidth;
     const clickX = e.offsetX;
     const { duration } = audioElement;
-    audioElement.currentTime = (clickX / width) * duration
-    playAudio()
+    audioElement.currentTime = (clickX / width) * duration;
+    playAudio();
   }
 
   // Function to play audio
   function playAudio() {
     showPauseButton();
     audioElement.play();
-    audioElement.addEventListener("timeupdate", updateProgressBar);
   }
 
   // Function to pause audio
   function pauseAudio() {
     showPlayButton();
     audioElement.pause();
-    audioElement.removeEventListener("timeupdate", updateProgressBar);
   }
 
   // Function to play the next song
   function playNextSong() {
     currentSongIndex = (currentSongIndex + 1) % songList.length;
     renderSong();
-    audioElement.play();
+    playAudio();
   }
 
   // Function to play the previous song
   function playPreviousSong() {
-    currentSongIndex =
-      (currentSongIndex - 1 + songList.length) % songList.length;
+    currentSongIndex = (currentSongIndex - 1 + songList.length) % songList.length;
     renderSong();
-    audioElement.play();
+    playAudio();
   }
 
   // Function to format time in minutes and seconds
@@ -160,18 +168,15 @@ function handleControlButtons(e) {
   switch (clickedButton.dataset.musicState) {
     case "play":
       musicPlayer.playAudio();
-
       break;
     case "pause":
       musicPlayer.pauseAudio();
       break;
     case "next":
       musicPlayer.playNextSong();
-      musicPlayer.playAudio();
       break;
     case "prev":
       musicPlayer.playPreviousSong();
-      musicPlayer.playAudio();
       break;
     default:
       console.error("Unknown action");
