@@ -52,7 +52,12 @@ function createMusicPlayer(songList) {
     progressBar.setAttribute("aria-valuenow", "0");
     currentTimePlayer.textContent = "0:00";
 
+    // Remove previous event listeners to avoid memory leaks
+    progressContainer.removeEventListener("click", updateDuration);
+    audioElement.removeEventListener("timeupdate", updateProgressBar);
+
     progressContainer.addEventListener("click", updateDuration);
+    audioElement.addEventListener("timeupdate", updateProgressBar);
   }
 
   // Function to show the play button
