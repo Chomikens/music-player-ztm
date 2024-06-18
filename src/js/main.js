@@ -186,3 +186,36 @@ function handleControlButtons(e) {
 // Add event listener to the button container
 const buttonContainer = getButtonContainer();
 buttonContainer.addEventListener("click", handleControlButtons);
+
+
+// Add swipe detection to the player container
+const playerContainer = document.querySelector('.player-container'); // Adjust this selector to your actual container
+playerContainer.addEventListener('touchstart', handleTouchStart, false);
+playerContainer.addEventListener('touchend', handleTouchEnd, false);
+
+// Variables to store touch start coordinates and touch end coordinates
+let touchstartX = 0;
+let touchendX = 0;
+
+// Function to handle touch start
+function handleTouchStart(event) {
+  touchstartX = event.changedTouches[0].screenX;
+}
+
+// Function to handle touch end
+function handleTouchEnd(event) {
+  touchendX = event.changedTouches[0].screenX;
+  handleGesture();
+}
+
+// Function to determine swipe direction
+function handleGesture() {
+  if (touchendX < touchstartX) {
+    // Swipe left
+    musicPlayer.playNextSong();
+  }
+  if (touchendX > touchstartX) {
+    // Swipe right
+    musicPlayer.playPreviousSong();
+  }
+}
