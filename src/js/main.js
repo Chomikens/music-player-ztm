@@ -67,10 +67,10 @@ function createMusicPlayer(songList) {
   // Function to update the progress bar
   function updateProgressBar(e) {
     const { currentTime, duration } = e.srcElement;
+    const progressPercent = Math.floor((currentTime / duration) * 100);
 
     if (currentTime) {
       currentTimePlayer.textContent = formatTime(currentTime);
-      const progressPercent = Math.floor((currentTime / duration) * 100);
       progressBar.style.width = `${progressPercent}%`;
       progressBar.setAttribute("aria-valuenow", `${progressPercent}%`);
     }
