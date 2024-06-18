@@ -67,13 +67,16 @@ function createMusicPlayer(songList) {
   // Function to update the progress bar
   function updateProgressBar(e) {
     const { currentTime, duration } = e.srcElement;
-    currentTimePlayer.textContent = formatTime(currentTime);
-    const progressPercent = Math.floor((currentTime / duration) * 100);
-    progressBar.style.width = `${progressPercent}%`;
-    progressBar.setAttribute("aria-valuenow", `${progressPercent}%`);
 
-    if(progressPercent === 100) {
-      playNextSong()
+    if (currentTime) {
+      currentTimePlayer.textContent = formatTime(currentTime);
+      const progressPercent = Math.floor((currentTime / duration) * 100);
+      progressBar.style.width = `${progressPercent}%`;
+      progressBar.setAttribute("aria-valuenow", `${progressPercent}%`);
+    }
+
+    if (progressPercent === 100) {
+      playNextSong();
     }
   }
 
@@ -98,7 +101,8 @@ function createMusicPlayer(songList) {
 
   // Function to play the previous song
   function playPreviousSong() {
-    currentSongIndex = (currentSongIndex - 1 + songList.length) % songList.length;
+    currentSongIndex =
+      (currentSongIndex - 1 + songList.length) % songList.length;
     renderSong();
     audioElement.play();
   }
