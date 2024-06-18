@@ -114,13 +114,15 @@ function handleControlButtons(e) {
       break;
 
     case "next":
-      musicPlayer.showPlayButton();
       musicPlayer.playNextSong();
+      musicPlayer.playAudio();
+      musicPlayer.showPauseButton();
       break;
 
     case "prev":
-      musicPlayer.showPlayButton();
       musicPlayer.playPreviousSong();
+      musicPlayer.playAudio();
+      musicPlayer.showPauseButton();
       break;
 
     default:
