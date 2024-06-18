@@ -1,23 +1,28 @@
 import songs from "./song.js";
-
-const buttonContainer = document.querySelector(".player-controls");
-const audioElement = document.querySelector("audio");
+import {
+  getButtonContainer,
+  getAudioElement,
+  getPlayButton,
+  getPlayIcon,
+  getPauseIcon,
+  getTitleElement,
+  getArtistElement,
+  getCoverImage,
+  getDurationElement,
+} from "./domElements.js";
 
 function createMusicPlayer(songList) {
-  const playButton = document.querySelector("button#play");
-  const playIcon = document.getElementById("playIcon");
-  const pauseIcon = document.getElementById("pauseIcon");
-
-  const nextButton = document.querySelector("button#next");
-  const prevButton = document.querySelector("button#prev");
+  const playButton = getPlayButton();
+  const playIcon = getPlayIcon();
+  const pauseIcon = getPauseIcon();
+  const audioElement = getAudioElement();
 
   let currentSongIndex = 0;
 
-  const titleElement = document.querySelector("#music-title");
-  const artistElement = document.querySelector("#music-author");
-  const coverImage = document.querySelector("#cover-img");
-
-  const durationElement = document.querySelector("#duration");
+  const titleElement = getTitleElement();
+  const artistElement = getArtistElement();
+  const coverImage = getCoverImage();
+  const durationElement = getDurationElement();
 
   function renderSong() {
     const currentSong = songList[currentSongIndex];
@@ -73,14 +78,15 @@ function createMusicPlayer(songList) {
   }
 
   function playPreviousSong() {
-    currentSongIndex = (currentSongIndex - 1 + songList.length) % songList.length;
+    currentSongIndex =
+      (currentSongIndex - 1 + songList.length) % songList.length;
     renderSong();
   }
 
   function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   }
 
   return {
@@ -130,6 +136,7 @@ function handleControlButtons(e) {
   }
 }
 
+const buttonContainer = getButtonContainer();
 buttonContainer.addEventListener("click", (e) => {
   handleControlButtons(e);
 });
