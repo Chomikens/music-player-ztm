@@ -34,7 +34,7 @@ function createMusicPlayer(songList) {
   // Function to render a song
   function renderSong() {
     const currentSong = songList[currentSongIndex];
-    coverImage.src = `src/img/${currentSong.name}.jpg`;
+    coverImage.src = `src/img/${currentSong.name}.webp`;
     titleElement.textContent = currentSong.displayName;
     artistElement.textContent = currentSong.artist;
     audioElement.src = `src/mp3/${currentSong.name}.mp3`;
@@ -47,6 +47,11 @@ function createMusicPlayer(songList) {
     audioElement.onloadedmetadata = function () {
       durationElement.textContent = formatTime(audioElement.duration);
     };
+
+    progressBar.style.width = "0%";
+    progressBar.setAttribute("aria-valuenow", "0");
+    currentTimePlayer.textContent = "0:00";
+
     progressContainer.addEventListener("click", updateDuration);
   }
 
